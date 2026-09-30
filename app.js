@@ -1,21 +1,17 @@
 (() => {
-  const form = document.getElementById("quoteForm");
-  const submitBtn = document.getElementById("submitBtn");
-  const status = document.getElementById("formStatus");
-  const phone = form.elements.phone;
-  const params = new URLSearchParams(location.search);
-  document.getElementById("sourceField").value = params.get("utm_source") || params.get("source") || document.referrer || "direct";
-  document.getElementById("pageField").value = location.href;
-  document.getElementById("deviceField").value = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent) ? "mobile" : "desktop";
-  phone.addEventListener("input",(e)=>{const n=e.target.value.replace(/\D/g,"").slice(0,11);if(n.length<4)e.target.value=n;else if(n.length<8)e.target.value=`${n.slice(0,3)}-${n.slice(3)}`;else e.target.value=`${n.slice(0,3)}-${n.slice(3,7)}-${n.slice(7)}`;});
-  form.addEventListener("submit",async(e)=>{
-    e.preventDefault();
-    const url=window.LANDING_CONFIG?.GOOGLE_SCRIPT_URL||"";
-    if(!url||url.includes("PASTE_YOUR")){status.className="form-status err";status.textContent="Google Sheets 연결 주소가 아직 설정되지 않았습니다.";return;}
-    const payload=Object.fromEntries(new FormData(form).entries());payload.submittedAt=new Date().toISOString();payload.userAgent=navigator.userAgent;
-    submitBtn.disabled=true;submitBtn.textContent="접수 중...";status.className="form-status";status.textContent="";
-    try{await fetch(url,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(payload)});status.className="form-status ok";status.textContent="견적 요청이 접수되었습니다. 확인 후 연락드리겠습니다.";form.reset();document.getElementById("sourceField").value=params.get("utm_source")||"direct";document.getElementById("pageField").value=location.href;document.getElementById("deviceField").value=/Mobi|Android|iPhone|iPad/i.test(navigator.userAgent)?"mobile":"desktop";}
-    catch(err){status.className="form-status err";status.textContent="접수 중 오류가 발생했습니다. 전화 상담을 이용해주세요.";}
-    finally{submitBtn.disabled=false;submitBtn.textContent="무료 견적 요청하기";}
-  });
+ const forms=[...document.querySelectorAll('form')]; let sending=false;
+ const oldUrl='https://windowking.gritty-crow-5613.chatgpt.site/';
+ function message(form,text,ok=false){let el=form.querySelector('.result');if(!el){el=document.createElement('p');el.className='result';el.setAttribute('role','status');form.append(el)}el.textContent=text;el.style.color=ok?'#16824b':'#cc3131';}
+ forms.forEach(form=>form.addEventListener('submit',async e=>{
+  e.preventDefault();if(sending||!form.reportValidity())return;
+  const fixed=form.classList.contains('fixed-quote-inner');const inputs=[...form.querySelectorAll('input')];const selects=[...form.querySelectorAll('select')];
+  const main=forms.find(f=>!f.classList.contains('fixed-quote-inner'));
+  const data={name:inputs[0].value.trim(),phone:fixed?`010-${inputs[2].value}-${inputs[3].value}`:inputs[1].value,region:selects[0].value,building:fixed?'':selects[1].value,scope:fixed?'':selects[2].value,detail:'',source:document.referrer||'확인불가',landing:location.href,device:/Mobi|Android|iPhone/i.test(navigator.userAgent)?'모바일':'PC',consent:form.querySelector('[type=checkbox]').checked};
+  if(!/^01[016789]-?\d{3,4}-?\d{4}$/.test(data.phone.replace(/\s/g,''))){message(form,'휴대폰 번호를 확인해 주세요.');return;}
+  sending=true;forms.forEach(f=>f.querySelector('button').disabled=true);message(form,'접수 중...');
+  try{const response=await fetch('/api/requests',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(data)});const result=await response.json();if(!response.ok||!result.ok)throw new Error(result.error||'접수되지 않았습니다. 잠시 후 다시 시도해 주세요.');message(form,'견적 요청이 접수되었습니다. 담당자가 연락드리겠습니다.',true);form.reset();}
+  catch(error){message(form,error.message);}
+  finally{sending=false;forms.forEach(f=>f.querySelector('button').disabled=false);}
+ }));
+ fetch('/api/requests').then(r=>r.json()).then(({ready})=>{if(ready)return;forms.forEach(form=>{form.querySelector('button').disabled=true;const p=document.createElement('p');p.className='result';p.append('새 사이트의 접수 연결을 준비 중입니다. ');const a=document.createElement('a');a.href=oldUrl+'#quote';a.textContent='기존 사이트에서 견적 요청하기';a.style.color='inherit';a.style.textDecoration='underline';p.append(a);form.append(p);});}).catch(()=>forms.forEach(form=>message(form,'접수 연결을 확인할 수 없습니다. 기존 사이트를 이용해 주세요.')));
 })();
