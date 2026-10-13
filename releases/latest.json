@@ -1,18 +1,28 @@
 {
   "appId": "timo-title-extension",
-  "version": "0.1.3",
-  "minVersion": "0.1.0",
+  "version": "0.2.0",
+  "minVersion": "0.1.3",
   "releaseType": "patch",
   "files": [
     {
       "path": "manifest.json",
-      "url": "https://raw.githubusercontent.com/a67681902-spec/window/timo-updates/releases/v0.1.3/manifest.json",
-      "sha256": "352f05fc12bbcc6c4cc66fb645c95aacea979fd7d3625dfe5218808ecba92cdc"
+      "url": "https://raw.githubusercontent.com/a67681902-spec/window/timo-updates/releases/v0.2.0/manifest.json",
+      "sha256": "3907ea77b854ac07c537197fcff429b5304688d21561d13d2edc107fef528d10"
     },
     {
       "path": "build-info.json",
-      "url": "https://raw.githubusercontent.com/a67681902-spec/window/timo-updates/releases/v0.1.3/build-info.json",
-      "sha256": "75fe73027192128e8c27b1abbe5261be9e8c621dad217a2be0ba571f66cba71d"
+      "url": "https://raw.githubusercontent.com/a67681902-spec/window/timo-updates/releases/v0.2.0/build-info.json",
+      "sha256": "d8b6aea8518de19e8520dfc93c58d5781212d63f339d92e2ab3b507f771afd77"
+    },
+    {
+      "path": "popup.html",
+      "url": "https://raw.githubusercontent.com/a67681902-spec/window/timo-updates/releases/v0.2.0/popup.html",
+      "sha256": "045334e1532789bc19b33cc8372aec6fe2be0f9fb00f7fe32976d1282f12a342"
+    },
+    {
+      "path": "popup.js",
+      "url": "https://raw.githubusercontent.com/a67681902-spec/window/timo-updates/releases/v0.2.0/popup.js",
+      "sha256": "e7a64aba7ec146d603259d10fee2157906fddff8315ef5b977308f2a67e1bb48"
     }
   ]
 }
