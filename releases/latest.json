@@ -1,38 +1,38 @@
 {
   "appId": "timo-title-extension",
-  "version": "0.2.1",
-  "minVersion": "0.2.0",
+  "version": "0.2.2",
+  "minVersion": "0.2.1",
   "releaseType": "patch",
   "files": [
     {
       "path": "manifest.json",
-      "url": "https://raw.githubusercontent.com/a67681902-spec/window/timo-updates/releases/v0.2.1/manifest.json",
-      "sha256": "72ac6d7c0c81bd1536b5480b9b5ff96b7b51fb19f1759935b4be9d328a938a09"
+      "url": "https://raw.githubusercontent.com/a67681902-spec/window/timo-updates/releases/v0.2.2/manifest.json",
+      "sha256": "9878319d2ddea98452a7059a4d2da9a6a74c0b01fb74c682b473c77d6a71f111"
     },
     {
       "path": "build-info.json",
-      "url": "https://raw.githubusercontent.com/a67681902-spec/window/timo-updates/releases/v0.2.1/build-info.json",
-      "sha256": "ca7106b9c3b75a8b752b348c945c84d882f6a4b58b437595c79744958565fa11"
+      "url": "https://raw.githubusercontent.com/a67681902-spec/window/timo-updates/releases/v0.2.2/build-info.json",
+      "sha256": "f7c216d9b2ac47a618c572faa9243325c4aded08733c60832ceb2bd685177e9d"
     },
     {
       "path": "popup.js",
-      "url": "https://raw.githubusercontent.com/a67681902-spec/window/timo-updates/releases/v0.2.1/popup.js",
+      "url": "https://raw.githubusercontent.com/a67681902-spec/window/timo-updates/releases/v0.2.2/popup.js",
       "sha256": "443bb694033a07f6b9e0efbd74a4386e2869fbb48f0da9d670bd850b505cade6"
     },
     {
       "path": "title-generator-v2.html",
-      "url": "https://raw.githubusercontent.com/a67681902-spec/window/timo-updates/releases/v0.2.1/title-generator-v2.html",
-      "sha256": "d5f97c9af90b0a00752827ed42f69be84c5d41250a152ca1b0f52c8c8a0c1a3c"
+      "url": "https://raw.githubusercontent.com/a67681902-spec/window/timo-updates/releases/v0.2.2/title-generator-v2.html",
+      "sha256": "71f418ce9d9530db639430ea154ba6d173aa280bb78f5b5540f3e6967e5bbc15"
     },
     {
       "path": "title-generator-v2-loader.js",
-      "url": "https://raw.githubusercontent.com/a67681902-spec/window/timo-updates/releases/v0.2.1/title-generator-v2-loader.js",
+      "url": "https://raw.githubusercontent.com/a67681902-spec/window/timo-updates/releases/v0.2.2/title-generator-v2-loader.js",
       "sha256": "e7258d4fd18338d4e1bab221379a38884ab64fc6dd8a485edc03adc7dd0c281e"
     },
     {
       "path": "title-generator-enhance.js",
-      "url": "https://raw.githubusercontent.com/a67681902-spec/window/timo-updates/releases/v0.2.1/title-generator-enhance.js",
-      "sha256": "eae63bb95a704e97b77412d0d4027e80b9be98ea52c899212fe5e7f772dea9ca"
+      "url": "https://raw.githubusercontent.com/a67681902-spec/window/timo-updates/releases/v0.2.2/title-generator-enhance.js",
+      "sha256": "c8c439e816b4c88ef3ec179a70a4a7f6427e20aa9d337d31890ee0aed77fd9ff"
     }
   ]
 }
