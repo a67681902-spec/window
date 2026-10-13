@@ -1,18 +1,18 @@
 {
   "appId": "timo-title-extension",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "minVersion": "0.1.0",
   "releaseType": "patch",
   "files": [
     {
       "path": "manifest.json",
-      "url": "https://raw.githubusercontent.com/a67681902-spec/window/timo-updates/releases/v0.1.2/manifest.json",
-      "sha256": "21688dd5d2bd396b4b2caf6a59c5534ea5600388f1adcfbaab45709f69394f3e"
+      "url": "https://raw.githubusercontent.com/a67681902-spec/window/timo-updates/releases/v0.1.3/manifest.json",
+      "sha256": "352f05fc12bbcc6c4cc66fb645c95aacea979fd7d3625dfe5218808ecba92cdc"
     },
     {
       "path": "build-info.json",
-      "url": "https://raw.githubusercontent.com/a67681902-spec/window/timo-updates/releases/v0.1.2/build-info.json",
-      "sha256": "ea0600c89c9fe8f70a958e03309163786ac759271d97603c5deaace6f72c386d"
+      "url": "https://raw.githubusercontent.com/a67681902-spec/window/timo-updates/releases/v0.1.3/build-info.json",
+      "sha256": "75fe73027192128e8c27b1abbe5261be9e8c621dad217a2be0ba571f66cba71d"
     }
   ]
 }
