@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "티모 제목·배포 도우미",
+  "name": "티모 제목 템플릿 생성기",
   "description": "티모 제목 템플릿 생성, GitHub 자동 업데이트 및 플레이스 배포 화면 입력 구조 점검.",
   "version": "0.3.0",
   "action": {
