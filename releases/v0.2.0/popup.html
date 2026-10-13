@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>티모 작업 도우미</title>
+<style>
+*{box-sizing:border-box}body{width:332px;margin:0;padding:18px;background:#f6f8fd;color:#182a49;font:14px system-ui,"Malgun Gothic",sans-serif}
+h1{font-size:19px;margin:0 0 4px}p{font-size:12px;color:#5e6d85;line-height:1.55;margin:6px 0}.card{border:1px solid #dbe4f1;background:#fff;border-radius:12px;padding:14px;margin:13px 0}
+.line{display:flex;justify-content:space-between;align-items:center;gap:8px}.version{font-weight:800;color:#2349ab}button{font:inherit;border-radius:8px;border:1px solid #c9d8f5;cursor:pointer;width:100%;margin-top:8px;padding:10px 12px;color:#27437f;background:#edf3ff;font-weight:700}button.primary{background:#315be4;border-color:#315be4;color:#fff}button:disabled{opacity:.55;cursor:wait}.notice{white-space:pre-wrap;font-size:12px;color:#375474;background:#edf2fa;border-radius:8px;padding:10px;line-height:1.5}.notice.ok{color:#146043;background:#e6f6ed}.notice.err{color:#92312c;background:#fff0ed}small{font-size:11px;line-height:1.5;color:#65738a;display:block;margin-top:10px}
+</style>
+</head>
+<body>
+<h1>티모 작업 도우미</h1>
+<p>제목 템플릿 생성과 업데이트를 한 곳에서 관리합니다.</p>
+<div class="card">
+<div class="line"><strong>현재 설치 버전</strong><span class="version" id="ver">확인 중</span></div>
+<div class="line" style="margin-top:8px"><span>GitHub 최신 버전</span><b id="latest">확인 전</b></div>
+<button id="open" class="primary">제목 템플릿 생성기 열기</button>
+<button id="checkRelease">최신 버전 확인</button>
+<button id="updateNow" class="primary">지금 업데이트 실행</button>
+</div>
+<div id="status" class="notice" role="status" aria-live="polite">버튼을 누르면 GitHub에서 최신 버전을 확인할 수 있습니다.</div>
+<small>‘지금 업데이트 실행’은 Windows 연결 도우미를 최초 1회 설치해야 작동합니다. 새 버전 설치 시 생성기를 저장하고 닫아 주세요.</small>
+<script src="popup.js"></script>
+</body>
+</html>
