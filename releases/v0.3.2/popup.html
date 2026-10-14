@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>티모 작업 도우미</title>
+<style>
+*{box-sizing:border-box}body{width:352px;margin:0;padding:18px;background:#f6f8fd;color:#182a49;font:14px system-ui,"Malgun Gothic",sans-serif}
+h1{font-size:19px;margin:0 0 4px}p{font-size:12px;color:#5e6d85;line-height:1.55;margin:6px 0}
+.card{border:1px solid #dbe4f1;background:#fff;border-radius:12px;padding:14px;margin:13px 0}
+.card h2{font-size:14px;margin:0 0 5px}.line{display:flex;justify-content:space-between;align-items:center;gap:8px}.version{font-weight:800;color:#2349ab}
+button{font:inherit;border-radius:8px;border:1px solid #c9d8f5;cursor:pointer;width:100%;margin-top:8px;padding:10px 12px;color:#27437f;background:#edf3ff;font-weight:700}
+button.primary{background:#315be4;border-color:#315be4;color:#fff}button:disabled{opacity:.55;cursor:wait}
+.notice{white-space:pre-wrap;font-size:12px;color:#375474;background:#edf2fa;border-radius:8px;padding:10px;line-height:1.5}
+.notice.ok{color:#146043;background:#e6f6ed}.notice.err{color:#92312c;background:#fff0ed}
+small{font-size:11px;line-height:1.5;color:#65738a;display:block;margin-top:10px}
+</style></head><body>
+<h1>티모 작업 도우미</h1><p>제목 생성 · 플레이스 배포 입력 준비 · 업데이트</p>
+<div class="card">
+<div class="line"><strong>현재 설치 버전</strong><span class="version" id="ver">확인 중</span></div>
+<div class="line" style="margin-top:8px"><span>GitHub 최신 버전</span><b id="latest">확인 전</b></div>
+<button id="open" class="primary">제목 템플릿 생성기 열기</button>
+<button id="checkRelease">최신 버전 확인</button><button id="updateNow">지금 업데이트 실행</button>
+</div>
+<div class="card">
+<h2>플레이스 배포 자동입력 준비</h2>
+<p>티모의 <b>플레이스 배포 → 새 배포 설정 화면</b>을 연 상태에서 실행하세요. 화면의 입력칸 이름·종류·위치만 분석합니다.</p>
+<button id="openTimo">티모 사이트 열기</button>
+<button id="inspectTimo" class="primary">현재 티모 배포 화면 분석 · 파일 저장</button>
+<small>조회 전용. 로그인 정보, 입력된 주소·원고·비밀번호·쿠키는 저장하지 않습니다. 배포 버튼도 누르지 않습니다.</small>
+</div>
+<div class="card">
+<h2>제목 템플릿 엑셀 등록</h2>
+<p>기존 티모 방식 그대로 제목 생성기에서 만든 엑셀을 업로드합니다. ‘제목 내 필수 기재될 텍스트’ 설정은 변경하지 않습니다.</p>
+<button id="openTemplatePage">현재 배포의 제목 템플릿 화면 열기</button>
+<button id="pickTemplateExcel" class="primary">제목 템플릿 엑셀 업로드</button>
+<small>티모 제목 템플릿 화면에서 누르세요. 파일 선택 후 티모에 표시된 제목 개수를 확인합니다. 기존 목록 삭제나 배포 실행은 하지 않습니다.</small>
+</div>
+<div class="card">
+<h2>배포 자료 등록 도우미</h2>
+<p>현재 티모 배포 건의 자료 등록 화면으로 이동하고, 해당 화면의 기존 파일 선택 기능을 사용합니다.</p>
+<label for="timoAssetType" style="font-weight:700;font-size:12px">등록할 자료</label>
+<select id="timoAssetType" style="width:100%;margin:8px 0;padding:9px;border:1px solid #c9d8f5;border-radius:7px;background:#fff;font:inherit">
+<option value="images">리소스 이미지 (기존 39장)</option>
+<option value="references">참고원고 (.txt/.doc/.docx)</option>
+<option value="templates">제목 템플릿 (.xlsx/.xls/.txt)</option>
+<option value="features">기능 이미지 (별도 설정)</option>
+</select>
+<button id="openAssetTab">선택한 자료 등록 화면 열기</button>
+<button id="assistAsset" class="primary">현재 화면에서 파일 선택 도우미 실행</button>
+<small>자료 파일은 사용자가 PC에서 선택합니다. 실제 업로드 개수는 티모 화면에서 검증합니다. 배포·진행·기존 파일 삭제는 자동 실행하지 않습니다.</small>
+</div>
+<div id="status" class="notice" role="status" aria-live="polite">자동배포 연결을 위한 화면 구조를 먼저 확인합니다.</div>
+<small>화면 분석 파일은 PC의 다운로드 폴더에 저장됩니다. 저에게 파일을 보내주시면 실제 자동입력을 연결합니다.</small>
+<script src="popup.js"></script></body></html>
