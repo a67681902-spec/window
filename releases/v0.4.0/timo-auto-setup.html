@@ -20,7 +20,7 @@ button{font:650 13px system-ui,"Malgun Gothic",sans-serif;border-radius:8px;bord
 <button id="refreshTitle">제목 생성기 키워드 다시 읽기</button>
 <label for="extraKeywords">추가할 키워드 (선택)</label><input id="extraKeywords" placeholder="쉼표로 구분">
 <label>포함되지 않을 키워드 (고정)</label><div><span class="chip fixed">대출</span><span class="chip fixed">이자</span></div>
-<p class="small">고정 제외어는 생성된 제목/참고원고에 포함되어 있는지 검사합니다. 티모 자체 제외어 기능과 연동됐는지는 별도로 확인해야 합니다.</p>
+<p class="small">고정 제외어는 우선 생성 키워드에서 검사합니다. 원고 본문 검사와 티모 자체 제외어 설정 연동은 아직 구현 전입니다.</p>
 <div id="keywordSummary" class="small">키워드 준비 중</div></section>
 <section class="panel"><h2>3. 배포설정 기본값</h2>
 <label for="otherUrl">기타 URL (다음 실행에도 유지)</label><input id="otherUrl" type="url" placeholder="https://example.com">
