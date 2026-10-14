@@ -167,7 +167,7 @@ $('start').addEventListener('click',async()=>{
   if(placeUrls.length!==1)throw Error('E_PLACE_COUNT · 이번 시험은 플레이스 주소 1개만 지원합니다. 한 줄에 실제 주소 1개만 입력해 주세요.');
   const placeUrl=placeUrls[0];
   const u=new URL(placeUrl);
-  if(!['http:','https:'].includes(u.protocol)||!u.hostname.endsWith('naver.com'))
+  if(!['http:','https:'].includes(u.protocol)||!(/(^|\.)naver\.com$/.test(u.hostname)||/(^|\.)naver\.me$/.test(u.hostname)))
     throw Error('E_PLACE_URL · 네이버 플레이스 주소인지 확인하세요.');
   const words=keywords();
   if(!context.keywords.length)throw Error('E_TITLE_CONTEXT · 제목 생성기에서 제목을 먼저 생성하세요. 이후 [키워드 다시 읽기]를 누르세요.');
