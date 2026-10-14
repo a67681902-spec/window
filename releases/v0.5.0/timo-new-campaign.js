@@ -47,6 +47,7 @@
      if(location.pathname!=='/posts/places')
        throw Error('E_PATH · 티모 플레이스 배포 목록(/posts/places)에서 시작해야 합니다');
      stage='신규 등록 열기';
+     await until(()=>buttons('등록').length===1,12000,'E_REGISTER_BUTTON');
      oneButton('등록').click();
      const urlInput=await until(()=>[...document.querySelectorAll('input')].find(x=>x.placeholder==='https://m.place.naver.com/...'&&visible(x)),8000,'E_PLACE_INPUT');
      stage='플레이스 주소 조회';
