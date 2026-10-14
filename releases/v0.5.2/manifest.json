@@ -1,0 +1,37 @@
+{
+  "manifest_version": 3,
+  "name": "티모 제목 템플릿 생성기",
+  "description": "제목 생성기 플레이스 주소 연동·신규 배포 사전입력·오류 진단",
+  "version": "0.5.2",
+  "action": {
+    "default_title": "티모 제목 템플릿 생성기",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/16.png",
+      "32": "icons/32.png",
+      "48": "icons/48.png"
+    }
+  },
+  "background": {
+    "service_worker": "worker.js"
+  },
+  "permissions": [
+    "activeTab",
+    "alarms",
+    "nativeMessaging",
+    "scripting",
+    "storage",
+    "tabs"
+  ],
+  "icons": {
+    "16": "icons/16.png",
+    "32": "icons/32.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },
+  "host_permissions": [
+    "https://raw.githubusercontent.com/*",
+    "https://xn--v52b175b.site/*",
+    "https://www.xn--v52b175b.site/*"
+  ]
+}
