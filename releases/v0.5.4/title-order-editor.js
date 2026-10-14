@@ -270,8 +270,8 @@
       for(const item of result.matches||[]){
         const id=String(item.id||'').trim();
         const key=id?'id:'+id:
-          'place:'+String(item.addr||'').trim().replace(/\\s+/g,' ').toLowerCase()+
-          '|'+String(item.name||'').trim().replace(/\\s+/g,' ').toLowerCase();
+          'place:'+String(item.addr||'').trim().replace(/\s+/g,' ').toLowerCase()+
+          '|'+String(item.name||'').trim().replace(/\s+/g,' ').toLowerCase();
         if(item.name&&item.addr)complexKeys.add(key);
       }
       const uniqueComplexCount=complexKeys.size;
