@@ -100,8 +100,10 @@
    return run().catch(e=>outcome('E_STAGE_FAILED',e.message,{saved:false}));
  }
  try{
-   if(!window.__timoStartConfig||typeof window.__timoStartConfig!=='object')
-     throw Error('실행 설정이 없습니다');
-   return executeWizard(window.__timoStartConfig);
+   const stored=await chrome.storage.local.get('timoNewCampaignPendingV1');
+   const config=stored.timoNewCampaignPendingV1;
+   if(!config||typeof config!=='object'||!config.placeUrl)
+     throw Error('E_CONFIG · 신규 배포 실행 설정이 없습니다. 생성기에서 다시 시작하세요.');
+   return executeWizard(config);
  }catch(e){return safe(e.message);}
 })();
