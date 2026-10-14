@@ -368,6 +368,139 @@ chrome.storage.onChanged.addListener((changes,area)=>{
   if(area==='local'&&changes.timoTitleContext)titleSync();
 });
 
+// TIMO 0.6.0 — explicit, per-resource transfer after a newly created
+// campaign was SAVED. No deletion, no publish, no unverified success claim.
+const transferTag='TIMO_TRANSFER_V060';
+let transferBusy=false;
+const kindSpecs={
+ images:{path:'images',label:'리소스 이미지',max:39},
+ references:{path:'references',label:'참고원고',max:60},
+ titles:{path:'templates',label:'제목 템플릿',max:1}
+};
+const statusAsset=(message,bad=false)=>{
+ $('assetStatus').className='status'+(bad?' err':'');
+ $('assetStatus').textContent=message;
+ if(bad){logs.push({time:new Date().toISOString(),code:'E_ASSET_TRANSFER',message});}
+};
+const discoverCampaign=async()=>{
+ const tabs=await chrome.tabs.query({url:['https://xn--v52b175b.site/*','https://www.xn--v52b175b.site/*']});
+ const entries=tabs.map(tab=>{
+   try{
+     const u=new URL(tab.url);
+     const m=u.pathname.match(/^\/posts\/places\/(\d+)\/(images|references|templates|features|edit|settings)\/?$/);
+     return m?{id:m[1],tab}:null;
+   }catch{return null;}
+ }).filter(Boolean);
+ const ids=[...new Set(entries.map(x=>x.id))];
+ if(ids.length!==1)throw Error('E_CAMPAIGN_DISCOVERY · 열린 티모 자료 페이지의 배포 ID가 '+ids.length+'개입니다. 저장된 신규 배포의 [리소스 이미지] 또는 [제목 템플릿] 탭 하나만 열어 주세요.');
+ $('campaignId').value=ids[0];
+ statusAsset('티모에서 열린 배포 ID '+ids[0]+'을 확인했습니다. 새로 만든 캠페인의 ID인지 확인한 후 자료별 전송 버튼을 누르세요.');
+};
+$('findCampaignId').addEventListener('click',()=>discoverCampaign().catch(e=>statusAsset(e.message,true)));
+function readTitleWorkbook(){
+ return new Promise((resolve,reject)=>{
+   const req=indexedDB.open('TIMO_GENERATED_TITLE_V1',1);
+   req.onerror=()=>reject(req.error||Error('제목 XLSX 저장소 읽기 실패'));
+   req.onsuccess=()=>{
+     const db=req.result;
+     if(!db.objectStoreNames.contains('title')){db.close();reject(Error('제목을 다시 생성해 주세요.'));return;}
+     const tx=db.transaction('title','readonly');
+     const r=tx.objectStore('title').get('latest');
+     r.onsuccess=()=>{db.close();resolve(r.result);};
+     r.onerror=()=>{db.close();reject(r.error);};
+   };
+ });
+}
+async function transferFiles(kind){
+ const spec=kindSpecs[kind];
+ if(!spec)throw Error('E_TRANSFER_KIND · 지원하지 않는 자료 종류');
+ const id=String($('campaignId').value||'').trim();
+ if(!/^[0-9]{3,12}$/.test(id))throw Error('E_CAMPAIGN_ID · 저장한 신규 배포의 숫자 ID를 확인해 주세요.');
+ let fs=[];
+ if(kind==='titles'){
+   const foreign=foreignRegionKeywords();
+   if(foreign.length)throw Error('E_TITLE_REGION · 제목에 다른 지역 키워드 '+foreign.join(', ')+'가 포함되어 있습니다. 제목 생성기에서 수정 후 다시 생성하세요.');
+   const result=await readTitleWorkbook();
+   if(!result?.blob||!(result.blob instanceof Blob))throw Error('E_WORKBOOK_MISSING · 생성 제목 XLSX를 찾지 못했습니다. 제목 생성기에서 다시 생성해 주세요.');
+   if(result.titleCount!==context.titlesCount||result.uniqueComplexCount!==context.uniqueComplexCount)
+     throw Error('E_WORKBOOK_STALE · 제목 XLSX와 현재 생성기 단지/제목 수가 다릅니다. 제목을 다시 생성해 주세요.');
+   const normalizeRegions=v=>[...new Set((v||[]).map(x=>String(x).trim()))].sort().join('|');
+   if(normalizeRegions(result.regions)!==normalizeRegions(context.regions))
+     throw Error('E_WORKBOOK_REGION · 생성 제목 파일의 배포지역이 다릅니다. 다시 제목을 생성해 주세요.');
+   fs=[new File([result.blob],'TIMO_generated_titles_'+String(result.createdAt||'').slice(0,10)+'.xlsx',
+     {type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'})];
+ }else{
+   const key=kind;
+   if(!handles[key])throw Error('E_FOLDER_MISSING · '+spec.label+' 폴더를 선택해 주세요.');
+   const p=await permission(handles[key]);
+   if(p!=='granted')throw Error('E_FOLDER_PERMISSION · '+spec.label+' 폴더 접근 권한을 다시 허용하세요.');
+   fs=await files(key);
+   if(kind==='images'&&fs.length!==39)
+     throw Error('E_IMAGE_COUNT · 리소스 이미지 39장이 필요합니다. 현재 '+fs.length+'장입니다.');
+   if(kind==='references'&&fs.length<1)
+     throw Error('E_REFERENCE_COUNT · 참고원고 폴더에 DOC/TXT 파일이 없습니다.');
+ }
+ const total=fs.reduce((sum,f)=>sum+f.size,0);
+ if(total>200*1024*1024)throw Error('E_UPLOAD_SIZE · 전체 파일이 200MB를 초과합니다.');
+ const pending=(await chrome.storage.local.get('timoNewCampaignPendingV1')).timoNewCampaignPendingV1;
+ const name=String(pending?.campaignName||'확인 필요');
+ if(!confirm('자료 등록 시험\n\n캠페인 ID: '+id+'\n최근 생성 캠페인명: '+name+
+     '\n자료: '+spec.label+'\n파일: '+fs.length+'개 ('+Math.round(total/1024/1024*10)/10+' MB)\n\n기존 자료는 삭제하지 않습니다. 잘못된 ID에 보내면 기존 자료에 추가될 수 있습니다. 이 배포가 신규로 저장한 캠페인인지 직접 확인하셨습니까?'))return;
+ const target='https://xn--v52b175b.site/posts/places/'+id+'/'+spec.path;
+ const tab=await chrome.tabs.create({url:target,active:false});
+ let loaded=false;
+ for(let retries=0;retries<35;retries++){
+   const state=await chrome.tabs.get(tab.id);
+   if(state.status==='complete'){loaded=true;break;}
+   await new Promise(resolve=>setTimeout(resolve,400));
+ }
+ if(!loaded)throw Error('E_TAB_LOAD · 티모 자료 화면이 열리지 않습니다.');
+ await chrome.scripting.executeScript({target:{tabId:tab.id},files:['timo-file-transfer.js']});
+ const send=async msg=>{
+   const answer=await chrome.tabs.sendMessage(tab.id,{tag:transferTag,...msg});
+   if(!answer?.ok)throw Error(answer?.error||'티모 파일 전송 응답이 없습니다.');
+   return answer;
+ };
+ const session='asset-'+Date.now()+'-'+kind;
+ try{
+   await send({cmd:'INIT',session,kind:spec.path,campaignId:id,
+     files:fs.map(f=>({name:f.name,size:f.size,type:f.type||''}))});
+   const maxChunk=256*1024;
+   for(let i=0;i<fs.length;i++){
+     const file=fs[i];let chunkIndex=0;
+     for(let at=0;at<file.size;at+=maxChunk){
+       const buffer=new Uint8Array(await file.slice(at,at+maxChunk).arrayBuffer());
+       let binary='';
+       for(let j=0;j<buffer.length;j+=32768)
+         binary+=String.fromCharCode(...buffer.subarray(j,j+32768));
+       await send({cmd:'CHUNK',session,fileIndex:i,chunkIndex:chunkIndex++,payload:btoa(binary)});
+     }
+     statusAsset(spec.label+' 전송 중: '+(i+1)+'/'+fs.length+'개 · 캠페인 ID '+id);
+   }
+   const reply=await send({cmd:'COMMIT',session});
+   if(reply.state!=='FILES_SELECTED'||reply.selectedCount!==fs.length)
+     throw Error('E_TRANSFER_CONFIRM · 티모의 파일 선택칸에 모두 전달되지 않았습니다.');
+   statusAsset(spec.label+' '+fs.length+'개가 티모 파일 선택칸에 전달됐습니다.\n서버 등록 성공 여부는 미확인입니다. 티모 화면에서 실제 업로드 목록/건수를 확인하세요.\n캠페인 ID: '+id);
+   await chrome.tabs.update(tab.id,{active:true});
+ }catch(e){
+   await send({cmd:'CANCEL',session}).catch(()=>{});
+   throw e;
+ }
+}
+for(const [kind,button] of [['images','uploadImageSet'],['references','uploadReferenceSet'],['titles','uploadTitleSet']]){
+ $(button).addEventListener('click',async()=>{
+   if(transferBusy)return;
+   transferBusy=true;
+   for(const id of ['uploadImageSet','uploadReferenceSet','uploadTitleSet'])$(id).disabled=true;
+   try{await transferFiles(kind);}
+   catch(e){statusAsset(e.message,true);}
+   finally{
+     transferBusy=false;
+     for(const id of ['uploadImageSet','uploadReferenceSet','uploadTitleSet'])$(id).disabled=false;
+   }
+ });
+}
+
 function setupFolding(){
  if(new URLSearchParams(location.search).get('embedded')==='1')document.body.classList.add('embedded');
  const sections=[...document.querySelectorAll('section.panel')];
