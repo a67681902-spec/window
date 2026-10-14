@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>티모 도우미</title>
+<style>
+*{box-sizing:border-box}body{width:310px;margin:0;padding:14px;background:#f7f9fc;color:#213452;font:13px system-ui,"Malgun Gothic",sans-serif}
+h1{font-size:16px;margin:0 0 3px}p{font-size:11px;color:#647791;line-height:1.5;margin:3px 0 8px}
+.meta{display:flex;justify-content:space-between;align-items:center;font-size:11px;color:#5d7091;margin:4px 0 9px}.meta strong{color:#3556a7}
+button{display:block;font:700 12px system-ui,"Malgun Gothic",sans-serif;padding:10px 9px;margin:7px 0;width:100%;background:#ecf3ff;color:#295398;border:1px solid #cad8ee;border-radius:8px;cursor:pointer}
+.primary{background:#315cda;color:#fff;border-color:#315cda}button:disabled{opacity:.55;cursor:wait}
+details{margin-top:9px;padding:9px;border:1px solid #dde6f4;background:#fff;border-radius:9px}
+summary{cursor:pointer;font-size:12px;font-weight:700;color:#526780}
+select{width:100%;font:12px system-ui;padding:8px;margin:5px 0;border:1px solid #cad8ee;border-radius:7px;background:#fff}
+#status{font-size:11px;padding:9px;border-radius:8px;background:#edf3fa;color:#395776;white-space:pre-wrap;max-height:76px;overflow:auto;line-height:1.5;margin-top:10px}
+#status.ok{color:#146043;background:#e8f6ee}#status.err{color:#92312c;background:#fff0ed}
+.foot{font-size:10px;margin-top:8px;color:#7b899a}
+</style></head><body>
+<h1>티모 도우미</h1>
+<div class="meta"><span>설치 <strong id="ver">확인 중</strong></span><span>최신 <strong id="latest">확인 중</strong></span></div>
+<button id="open" class="primary">제목 생성·배포 설정 열기</button>
+<button id="updateNow">지금 업데이트 실행</button>
+<details><summary>추가 기능 · 점검 도구</summary>
+<button id="checkRelease">버전 다시 확인</button>
+<button id="openAutoSetup">배포 설정 화면 바로 열기</button>
+<button id="openTimo">티모 사이트 열기</button>
+<button id="inspectTimo">현재 화면 구조 JSON 분석</button>
+<button id="openTemplatePage">기존 배포 제목 템플릿 화면 열기</button>
+<button id="pickTemplateExcel">기존 수동 엑셀 업로드</button>
+<select id="timoAssetType" aria-label="자료 등록 위치">
+<option value="images">리소스 이미지 (39장)</option>
+<option value="references">참고원고</option>
+<option value="templates">제목 템플릿</option>
+<option value="features">기능 이미지</option>
+</select>
+<button id="openAssetTab">선택한 자료 페이지 열기</button>
+<button id="assistAsset">파일 선택 도우미</button>
+</details>
+<div id="status" role="status" aria-live="polite">제목 생성과 배포 설정은 하나의 창에서 진행합니다.</div>
+<p class="foot">자동 5분 업데이트는 사용하지 않습니다. 실제 [진행] 버튼은 직접 누릅니다.</p>
+<script src="popup.js"></script></body></html>
