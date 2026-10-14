@@ -1,0 +1,34 @@
+{
+  "manifest_version": 3,
+  "name": "티모 제목 템플릿 생성기",
+  "description": "티모 제목 생성·자료 업로드 및 자동등록 준비 설정: 폴더 기억, 키워드 저장, URL 설정, 오류 진단",
+  "version": "0.4.0",
+  "action": {
+    "default_title": "티모 제목 템플릿 생성기",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/16.png",
+      "32": "icons/32.png",
+      "48": "icons/48.png"
+    }
+  },
+  "background": {
+    "service_worker": "worker.js"
+  },
+  "permissions": [
+    "activeTab",
+    "alarms",
+    "nativeMessaging",
+    "scripting",
+    "storage"
+  ],
+  "icons": {
+    "16": "icons/16.png",
+    "32": "icons/32.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },
+  "host_permissions": [
+    "https://raw.githubusercontent.com/*"
+  ]
+}
