@@ -70,11 +70,13 @@
      const control=leaf.closest('label,button,[role="radio"]')||leaf.parentElement;
      if(!control)throw Error('E_NEW_CAMPAIGN_CONTROL · 신규 캠페인 선택 요소를 찾지 못했습니다.');
      const isChosen=()=>{
-       for(let node=leaf,depth=0;node&&depth<4;depth++,node=node.parentElement){
-         if(node.matches?.('[role="radio"][aria-checked="true"],[aria-selected="true"],[data-state="checked"]'))
+       // Inspect ONLY the new-campaign control. A parent containing both
+       // options might report the OLD campaign's selected radio by mistake.
+       for(const node of [leaf,control]){
+         if(node.matches?.('[role="radio"][aria-checked="true"],[aria-selected="true"],[data-state="checked"],.ant-radio-checked'))
            return true;
-         if(node.querySelector?.('input[type="radio"]:checked'))return true;
-         if(node.querySelector?.('.ant-radio-checked'))return true;
+         if(node.querySelector?.('input[type="radio"]:checked,[role="radio"][aria-checked="true"],.ant-radio-checked,[data-state="checked"]'))
+           return true;
        }
        return false;
      };
