@@ -1,0 +1,37 @@
+{
+  "manifest_version": 3,
+  "name": "티모 제목 템플릿 생성기",
+  "description": "기타 URL 등록 검사 보완, 신규배포·제목·이미지·원고 전송 시험",
+  "version": "0.6.1",
+  "action": {
+    "default_title": "티모 제목 템플릿 생성기",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/16.png",
+      "32": "icons/32.png",
+      "48": "icons/48.png"
+    }
+  },
+  "background": {
+    "service_worker": "worker.js"
+  },
+  "permissions": [
+    "activeTab",
+    "alarms",
+    "nativeMessaging",
+    "scripting",
+    "storage",
+    "tabs"
+  ],
+  "icons": {
+    "16": "icons/16.png",
+    "32": "icons/32.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },
+  "host_permissions": [
+    "https://raw.githubusercontent.com/*",
+    "https://xn--v52b175b.site/*",
+    "https://www.xn--v52b175b.site/*"
+  ]
+}
