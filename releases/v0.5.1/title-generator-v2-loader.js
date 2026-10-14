@@ -127,8 +127,8 @@ function bindSharedPlaceUrl(){
       alertUser('기존 배포 설정의 플레이스 주소를 불러왔습니다.');
     }else if(entered&&stored&&entered!==stored){
       // Existing campaigns can have different addresses; do not silently select one.
-      alertUser('주의: 기존 배포 주소와 제목 생성기에 저장된 주소가 다릅니다. 사용하려는 주소를 이 칸에서 한 번 수정해 확정해 주세요.');
-      previous=entered;
+      alertUser('주의: 기존 배포 주소와 제목 생성기에 저장된 주소가 다릅니다. 사용할 주소를 수정한 뒤 이 칸에서 벗어나 확정해 주세요.');
+      previous=stored;
     }else{previous=entered;}
   }).catch(e=>alertUser('저장 주소를 확인하지 못했습니다: '+e.message));
 }
