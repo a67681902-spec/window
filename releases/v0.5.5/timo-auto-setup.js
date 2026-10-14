@@ -233,6 +233,7 @@ $('start').addEventListener('click',async()=>{
   const type=prefs.newPostType||'',genType=prefs.newGenType||'참고원고 기반 생성';
   if(!confirm(
     '새 티모 배포 설정 자동입력 시험\n\n플레이스: '+placeUrl+
+    '\n배포지역: '+context.regions.join(', ')+
     '\n키워드: '+words.length+'개\n배포 유형: '+(type||'티모 선택 유지')+
     '\n원고 방식: '+(genType||'티모 선택 유지')+
     '\n\n[등록]부터 자동으로 입력하지만 마지막 [저장]과 [진행]은 누르지 않습니다. 실행할까요?'))return;
