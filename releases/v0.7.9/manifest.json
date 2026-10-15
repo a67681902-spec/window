@@ -1,0 +1,37 @@
+{
+  "manifest_version": 3,
+  "name": "티모 제목 템플릿 생성기",
+  "description": "생성 키워드→블로그 하단 태그 자동연동 · 폴더 경로 복구 · 다중 URL · 생활권 배포",
+  "version": "0.7.9",
+  "action": {
+    "default_title": "티모 제목 템플릿 생성기",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/16.png",
+      "32": "icons/32.png",
+      "48": "icons/48.png"
+    }
+  },
+  "background": {
+    "service_worker": "worker.js"
+  },
+  "permissions": [
+    "activeTab",
+    "alarms",
+    "nativeMessaging",
+    "scripting",
+    "storage",
+    "tabs"
+  ],
+  "icons": {
+    "16": "icons/16.png",
+    "32": "icons/32.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },
+  "host_permissions": [
+    "https://raw.githubusercontent.com/*",
+    "https://xn--v52b175b.site/*",
+    "https://www.xn--v52b175b.site/*"
+  ]
+}
