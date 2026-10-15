@@ -2,7 +2,7 @@
   "appId": "timo-title-extension",
   "version": "0.7.0",
   "minVersion": "0.2.5",
-  "releaseType": "minor",
+  "releaseType": "patch",
   "files": [
     {
       "path": "manifest.json",
