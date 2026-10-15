@@ -1,0 +1,37 @@
+{
+  "manifest_version": 3,
+  "name": "티모 제목 템플릿 생성기",
+  "description": "기타URL 입력은 시도만 하고 검증 없이 저장 진행 · 원클릭 새배포 흐름",
+  "version": "0.7.23",
+  "action": {
+    "default_title": "티모 제목 템플릿 생성기",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/16.png",
+      "32": "icons/32.png",
+      "48": "icons/48.png"
+    }
+  },
+  "background": {
+    "service_worker": "worker.js"
+  },
+  "permissions": [
+    "activeTab",
+    "alarms",
+    "nativeMessaging",
+    "scripting",
+    "storage",
+    "tabs"
+  ],
+  "icons": {
+    "16": "icons/16.png",
+    "32": "icons/32.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },
+  "host_permissions": [
+    "https://raw.githubusercontent.com/*",
+    "https://xn--v52b175b.site/*",
+    "https://www.xn--v52b175b.site/*"
+  ]
+}
