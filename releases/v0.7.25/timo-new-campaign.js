@@ -301,23 +301,50 @@
    // fields in the earlier structural capture. Do not infer selection merely
    // from a click: inspect its actual selected state and fail if unknown.
    const selectNewCampaign=async()=>{
-     const leaf=leafByExactText('신규 캠페인');
-     const control=leaf.closest('label,button,[role="radio"]')||leaf.parentElement;
-     if(!control)throw Error('E_NEW_CAMPAIGN_CONTROL · 신규 캠페인 선택 요소를 찾지 못했습니다.');
-     const isChosen=()=>{
-       // Inspect ONLY the new-campaign control. A parent containing both
-       // options might report the OLD campaign's selected radio by mistake.
-       for(const node of [leaf,control]){
-         if(node.matches?.('[role="radio"][aria-checked="true"],[aria-selected="true"],[data-state="checked"],.ant-radio-checked'))
-           return true;
-         if(node.querySelector?.('input[type="radio"]:checked,[role="radio"][aria-checked="true"],.ant-radio-checked,[data-state="checked"]'))
-           return true;
-       }
-       return false;
-     };
-     if(!isChosen())control.click();
-     await tick(400);
-     if(!isChosen())throw Error('E_NEW_CAMPAIGN_UNVERIFIED · 신규 캠페인 선택 여부를 화면 구조로 확인하지 못했습니다. 기존 캠페인을 재사용하지 않도록 다음 단계로 진행하지 않았습니다. 이 화면의 상세 구조 JSON을 보내주세요.');
+     // Older TiMO forms have an explicit "신규 캠페인" option.
+     // Keep this previously verified selection route unchanged.
+     const exactNewChoices=[...document.querySelectorAll('label,span,div,p,button,strong')].filter(el=>{
+       if(!visible(el)||norm(el.textContent)!=='신규 캠페인')return false;
+       return ![...el.children].some(child=>norm(child.textContent)==='신규 캠페인');
+     });
+     if(exactNewChoices.length>1)
+       throw Error('E_NEW_CAMPAIGN_AMBIGUOUS · 신규 캠페인 선택 항목이 여러 개 있습니다.');
+     if(exactNewChoices.length===1){
+       const leaf=exactNewChoices[0];
+       const control=leaf.closest('label,button,[role="radio"]')||leaf.parentElement;
+       if(!control)throw Error('E_NEW_CAMPAIGN_CONTROL · 신규 캠페인 선택 요소를 찾지 못했습니다.');
+       const isChosen=()=>{
+         // Inspect ONLY the new-campaign control, not a shared old/new parent.
+         for(const node of [leaf,control]){
+           if(node.matches?.('[role="radio"][aria-checked="true"],[aria-selected="true"],[data-state="checked"],.ant-radio-checked'))
+             return true;
+           if(node.querySelector?.('input[type="radio"]:checked,[role="radio"][aria-checked="true"],.ant-radio-checked,[data-state="checked"]'))
+             return true;
+         }
+         return false;
+       };
+       if(!isChosen())control.click();
+       await tick(400);
+       if(!isChosen())
+         throw Error('E_NEW_CAMPAIGN_UNVERIFIED · 신규 캠페인 선택 여부를 화면 구조로 확인하지 못했습니다. 기존 캠페인을 재사용하지 않도록 진행을 멈췄습니다.');
+       return;
+     }
+
+     // 2026-10-27 form-map variant: lookup results contain "플레이스명 [신규]"
+     // with an editable campaign name, rather than a separate new-campaign radio.
+     // Act only on a UNIQUE [신규] entry, never choose an existing campaign.
+     const newLabel=/\[\s*신규\s*\]$/;
+     const newEntries=[...document.querySelectorAll('div,label,button,[role="option"],[role="radio"]')].filter(el=>{
+       if(!visible(el)||!newLabel.test(norm(el.textContent)))return false;
+       return ![...el.children].some(child=>newLabel.test(norm(child.textContent)));
+     });
+     if(newEntries.length!==1)
+       throw Error('E_NEW_CAMPAIGN_OPTION · [신규] 플레이스 선택 항목이 '+newEntries.length+'개입니다. 다른 캠페인에 자료를 입력하지 않도록 중단합니다.');
+     newEntries[0].click();
+     await tick(450);
+     const input=findCampaignNameField();
+     if(!input?.isConnected||!visible(input)||input.readOnly)
+       throw Error('E_NEW_CAMPAIGN_NAME_FIELD · [신규] 선택 후 캠페인명 입력칸을 확인하지 못했습니다. 다음 단계로 넘어가지 않았습니다.');
    };
    const findCampaignNameField=()=>{
      const targetLabel=[...document.querySelectorAll('label,span,div,p')].filter(el=>
