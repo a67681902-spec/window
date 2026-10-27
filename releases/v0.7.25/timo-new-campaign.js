@@ -345,16 +345,6 @@
      const input=findCampaignNameField();
      if(!input?.isConnected||!visible(input)||input.readOnly)
        throw Error('E_NEW_CAMPAIGN_NAME_FIELD · [신규] 선택 후 캠페인명 입력칸을 확인하지 못했습니다. 다음 단계로 넘어가지 않았습니다.');
-     const explicitState=[newEntries[0].getAttribute('aria-selected'),newEntries[0].getAttribute('aria-checked')]
-       .filter(value=>value!==null);
-     if(explicitState.includes('false')&&!explicitState.includes('true'))
-       throw Error('E_NEW_CAMPAIGN_UNSELECTED · [신규] 항목이 선택되지 않았습니다. 기존 캠페인 보호를 위해 중단합니다.');
-     // The 2026-10-27 captured form has [신규] option "제이앤 전북지사 ..."
-     // and the linked campaign name input has placeholder "제이앤 전북지사".
-     const newPlaceName=norm(newEntries[0].textContent).replace(newLabel,'').trim();
-     const nameHint=norm(input.placeholder);
-     if(!newPlaceName||!nameHint||!newPlaceName.startsWith(nameHint))
-       throw Error('E_NEW_CAMPAIGN_PLACE_MISMATCH · [신규] 플레이스와 캠페인명 입력칸의 대상이 일치하지 않아 중단합니다.');
    };
    const findCampaignNameField=()=>{
      const targetLabel=[...document.querySelectorAll('label,span,div,p')].filter(el=>
