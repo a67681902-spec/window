@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>티모 제목 생성·배포 준비</title>
+<style>
+*{box-sizing:border-box}html,body{height:100%;margin:0;font:14px system-ui,"Malgun Gothic",sans-serif;color:#283b60;background:#f5f7fc}
+body{display:flex;flex-direction:column}.top{flex:none;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;padding:9px 16px;background:#fff;border-bottom:1px solid #d9e3f3}
+.brand{display:flex;align-items:baseline;gap:9px}.brand strong{font-size:17px}.sub{color:#6b7d98;font-size:12px}
+.tabs{display:flex;gap:6px;align-items:center}.tabs button{font:700 13px system-ui,"Malgun Gothic",sans-serif;border:1px solid #cad7ed;border-radius:8px;background:#f2f6ff;color:#3b5789;cursor:pointer;padding:9px 14px}
+.tabs button[aria-selected="true"]{background:#2b58d9;border-color:#2b58d9;color:#fff}
+main{position:relative;flex:1;min-height:0}iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#f5f7fc}iframe[hidden]{display:none}
+@media(max-width:700px){.top{padding:9px}.brand strong{font-size:14px}.sub{font-size:10px}.tabs button{padding:8px}}
+</style></head><body>
+<header class="top">
+<div class="brand"><strong>티모 제목·배포</strong><span class="sub">제목 생성부터 배포 준비까지 한 화면</span></div>
+<nav class="tabs" aria-label="업무 화면 선택">
+<button id="tabGenerator" type="button" aria-selected="true">1. 제목 생성</button>
+<button id="tabDeploy" type="button" aria-selected="false">2. 배포 설정·오류</button>
+</nav></header>
+<main>
+<iframe id="generator" title="제목 템플릿 생성기" src="title-generator.html"></iframe>
+<iframe id="deployPanel" title="배포 자료와 오류 진단" src="timo-auto-setup.html?embedded=1" hidden></iframe>
+</main>
+<script src="title-generator-v2-loader.js"></script><script src="timo-integrated-shell.js"></script>
+</body></html>
