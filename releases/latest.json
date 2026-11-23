@@ -1,102 +1,102 @@
 {
   "appId": "timo-title-extension",
-  "version": "0.7.52",
+  "version": "0.7.53",
   "minVersion": "0.2.5",
   "releaseType": "patch",
   "files": [
     {
       "path": "apartment-master-autoload.js",
-      "url": "https://raw.githubusercontent.com/a67681902-spec/window/timo-updates/releases/v0.7.52/apartment-master-autoload.js",
+      "url": "https://raw.githubusercontent.com/a67681902-spec/window/timo-updates/releases/v0.7.53/apartment-master-autoload.js",
       "sha256": "6916f0f41aec11b825d2b6934fbfb8fb630a80cea3fc3a19f4d3f3747a638562"
     },
     {
       "path": "build-info.json",
-      "url": "https://raw.githubusercontent.com/a67681902-spec/window/timo-updates/releases/v0.7.52/build-info.json",
-      "sha256": "42034b3bdc50dbd60396d2d91d32863caea05a667b683a1249e7b26034ce192f"
+      "url": "https://raw.githubusercontent.com/a67681902-spec/window/timo-updates/releases/v0.7.53/build-info.json",
+      "sha256": "9be71c65fe7eefd7534bd2db961d0665728aed2e1febe2c558580a539e0751c9"
     },
     {
       "path": "manifest.json",
-      "url": "https://raw.githubusercontent.com/a67681902-spec/window/timo-updates/releases/v0.7.52/manifest.json",
-      "sha256": "22d0b8d30d49339a09196f8e01664e8555daf3e946aa99d85deae73ed3d4959e"
+      "url": "https://raw.githubusercontent.com/a67681902-spec/window/timo-updates/releases/v0.7.53/manifest.json",
+      "sha256": "9d4698a65307125b39dd397d66fba4eef0450103e2d61eafc45275b620002362"
     },
     {
       "path": "popup.html",
-      "url": "https://raw.githubusercontent.com/a67681902-spec/window/timo-updates/releases/v0.7.52/popup.html",
+      "url": "https://raw.githubusercontent.com/a67681902-spec/window/timo-updates/releases/v0.7.53/popup.html",
       "sha256": "2faaee4c4f8f46740fda7e1a2935d0395a2033d19684719602eee747d776d5bb"
     },
     {
       "path": "popup.js",
-      "url": "https://raw.githubusercontent.com/a67681902-spec/window/timo-updates/releases/v0.7.52/popup.js",
+      "url": "https://raw.githubusercontent.com/a67681902-spec/window/timo-updates/releases/v0.7.53/popup.js",
       "sha256": "83c28c5a4242b08eaa1ddb02f49725500d1693319ddabf9b76b52b439a6fa41f"
     },
     {
       "path": "timo-asset-helper.js",
-      "url": "https://raw.githubusercontent.com/a67681902-spec/window/timo-updates/releases/v0.7.52/timo-asset-helper.js",
+      "url": "https://raw.githubusercontent.com/a67681902-spec/window/timo-updates/releases/v0.7.53/timo-asset-helper.js",
       "sha256": "48c03ae69862229f6084166ffc4480413dd7fac380951ab8518b2e13a759526f"
     },
     {
       "path": "timo-auto-setup.html",
-      "url": "https://raw.githubusercontent.com/a67681902-spec/window/timo-updates/releases/v0.7.52/timo-auto-setup.html",
-      "sha256": "3130674d3df9cd5c3d9e52f2d4644603cc3760dc146aaf3c2cbdd0dd461c37ae"
+      "url": "https://raw.githubusercontent.com/a67681902-spec/window/timo-updates/releases/v0.7.53/timo-auto-setup.html",
+      "sha256": "8f06621b6d56c20b962cea542016f02fa47bc379025485f972057bbe1256fe87"
     },
     {
       "path": "timo-auto-setup.js",
-      "url": "https://raw.githubusercontent.com/a67681902-spec/window/timo-updates/releases/v0.7.52/timo-auto-setup.js",
-      "sha256": "3f35cebfb9fbd8f0801eea7d26d9c83cffc79fb6fd716167d2aad1ab0c88de50"
+      "url": "https://raw.githubusercontent.com/a67681902-spec/window/timo-updates/releases/v0.7.53/timo-auto-setup.js",
+      "sha256": "1346bebb445c8916daf5bab4c84284ac339b4cecd8b718be6aca8681ca613c51"
     },
     {
       "path": "timo-batch.js",
-      "url": "https://raw.githubusercontent.com/a67681902-spec/window/timo-updates/releases/v0.7.52/timo-batch.js",
-      "sha256": "01a5b619d18ef2ce8a5f6f07aa90edb145d703cc3f063d8d0605f7e76badbec9"
+      "url": "https://raw.githubusercontent.com/a67681902-spec/window/timo-updates/releases/v0.7.53/timo-batch.js",
+      "sha256": "7a1748c6b0ab412b69034ec79118f8e6f7af559668d2ec6d537498ef70b54175"
     },
     {
       "path": "timo-file-transfer.js",
-      "url": "https://raw.githubusercontent.com/a67681902-spec/window/timo-updates/releases/v0.7.52/timo-file-transfer.js",
+      "url": "https://raw.githubusercontent.com/a67681902-spec/window/timo-updates/releases/v0.7.53/timo-file-transfer.js",
       "sha256": "efef9215f42e824ebddff2a14b58983a1f7793fb758a131eeb9becb7096d97a8"
     },
     {
       "path": "timo-generator-ui.js",
-      "url": "https://raw.githubusercontent.com/a67681902-spec/window/timo-updates/releases/v0.7.52/timo-generator-ui.js",
+      "url": "https://raw.githubusercontent.com/a67681902-spec/window/timo-updates/releases/v0.7.53/timo-generator-ui.js",
       "sha256": "80d2fadf121a333fdaffb42ce9ef5d36980a31f75d5d58b6eba4f87590145408"
     },
     {
       "path": "timo-integrated-shell.js",
-      "url": "https://raw.githubusercontent.com/a67681902-spec/window/timo-updates/releases/v0.7.52/timo-integrated-shell.js",
+      "url": "https://raw.githubusercontent.com/a67681902-spec/window/timo-updates/releases/v0.7.53/timo-integrated-shell.js",
       "sha256": "990835805d120a48bf730b74b5d1786c01e73a9ae5ad6ced2878493927e0c9e2"
     },
     {
       "path": "timo-new-campaign.js",
-      "url": "https://raw.githubusercontent.com/a67681902-spec/window/timo-updates/releases/v0.7.52/timo-new-campaign.js",
+      "url": "https://raw.githubusercontent.com/a67681902-spec/window/timo-updates/releases/v0.7.53/timo-new-campaign.js",
       "sha256": "89798fa8009aeea8cbdf2ccfaf129ce4869c36132a3a9b5c23226b11c69cd7d3"
     },
     {
       "path": "timo-region-reference.js",
-      "url": "https://raw.githubusercontent.com/a67681902-spec/window/timo-updates/releases/v0.7.52/timo-region-reference.js",
+      "url": "https://raw.githubusercontent.com/a67681902-spec/window/timo-updates/releases/v0.7.53/timo-region-reference.js",
       "sha256": "784419cc01b5ea42f271fec00753e72b3203e66d01882e5dc393c0e106995047"
     },
     {
       "path": "timo-template-upload.js",
-      "url": "https://raw.githubusercontent.com/a67681902-spec/window/timo-updates/releases/v0.7.52/timo-template-upload.js",
+      "url": "https://raw.githubusercontent.com/a67681902-spec/window/timo-updates/releases/v0.7.53/timo-template-upload.js",
       "sha256": "01ec7fea8e7818bd70746da80110461f4d8a78ee71af73f1aa33b05e20dde7d4"
     },
     {
       "path": "title-generator-enhance.js",
-      "url": "https://raw.githubusercontent.com/a67681902-spec/window/timo-updates/releases/v0.7.52/title-generator-enhance.js",
+      "url": "https://raw.githubusercontent.com/a67681902-spec/window/timo-updates/releases/v0.7.53/title-generator-enhance.js",
       "sha256": "c1ece12f4f075f915edc1d3cb0b333c54a4b091bb9780c92a17261a96d5766a8"
     },
     {
       "path": "title-generator-v2-loader.js",
-      "url": "https://raw.githubusercontent.com/a67681902-spec/window/timo-updates/releases/v0.7.52/title-generator-v2-loader.js",
+      "url": "https://raw.githubusercontent.com/a67681902-spec/window/timo-updates/releases/v0.7.53/title-generator-v2-loader.js",
       "sha256": "0209055401b591c3576632c2331be6f296067ea266e80b04425856009ac00937"
     },
     {
       "path": "title-generator-v2.html",
-      "url": "https://raw.githubusercontent.com/a67681902-spec/window/timo-updates/releases/v0.7.52/title-generator-v2.html",
+      "url": "https://raw.githubusercontent.com/a67681902-spec/window/timo-updates/releases/v0.7.53/title-generator-v2.html",
       "sha256": "cbfc185dde0c721d591c8a0b47b64af121548632597a8cd90660f90a831957a5"
     },
     {
       "path": "title-order-editor.js",
-      "url": "https://raw.githubusercontent.com/a67681902-spec/window/timo-updates/releases/v0.7.52/title-order-editor.js",
+      "url": "https://raw.githubusercontent.com/a67681902-spec/window/timo-updates/releases/v0.7.53/title-order-editor.js",
       "sha256": "12b2dde08846523ba3c6f97dba109b4dfbbf87cefc4fac4fb36cebb3e4b35305"
     }
   ]
